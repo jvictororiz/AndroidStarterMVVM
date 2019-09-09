@@ -1,4 +1,4 @@
-package br.com.androidstartermvvm.model.service.http
+package br.com.androidstartermvvm.data.entities.remote.response
 
 import com.google.gson.annotations.SerializedName
 

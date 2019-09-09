@@ -1,9 +1,10 @@
 package br.com.bb.oewallet.extension
 
-import br.com.androidstartermvvm.util.entities.Result
+import br.com.androidstartermvvm.data.entities.local.Result
+import br.com.androidstartermvvm.util.AppDispatchers
+import br.com.androidstartermvvm.util.ext.AppUtil
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import okhttp3.ResponseBody
 import retrofit2.Call
 import java.net.ConnectException
 
@@ -25,27 +26,27 @@ suspend fun <T> Call<T>.backgroundCall(dispatcher: CoroutineDispatcher): Result<
             if (e is ConnectException || e is java.net.UnknownHostException) {
                 Result.error<T?>(ConnectException("Seu dispositivo está sem internet."))
             } else {
-                Result.error<T?>(e)
+                Result.error(e)
             }
         }
     }
 }
 
-/**
- * Facilita chamadas sem corpo na resposta, verificando apenas se o chamada retornou uma resposta
- * com sucesso.
- */
-suspend fun Call<ResponseBody>.checkCall(dispatcher: CoroutineDispatcher): Result<Boolean> {
-    return withContext(context = dispatcher) {
-        try {
-            val response = this@checkCall.execute()
+suspend fun <T> Call<T>.ifOffline(listenerOffline: () -> T?): Result<T?> {
+    if (AppUtil.isNetworkConnected()) {
+        return withContext(context = AppDispatchers().io) {
+            val response = this@ifOffline.execute()
             if (response.isSuccessful) {
-                Result.success(true, response.code())
+                Result.success(response.body(), response.code())
             } else {
-                Result.error("Response wasn't successful (SC = ${response.raw().code()})")
+                Result.error(response.headers().get("ERROR"))
             }
-        } catch (e: Exception) {
-            Result.error<Boolean>(e)
+        }
+    } else {
+        return withContext(context = AppDispatchers().computation) {
+            val response = listenerOffline()
+            Result.success(response, 0)
         }
     }
 }
+

@@ -1,20 +1,17 @@
-package br.com.androidstartermvvm.repository
+package br.com.androidstartermvvm.data.service.retrofitConfig
 
-import br.com.androidstartermvvm.model.service.RespostaService
-import br.com.androidstartermvvm.model.service.http.BackendInterceptor
-import br.com.androidstartermvvm.model.service.http.RetrofitClient
+import br.com.androidstartermvvm.data.service.RespostaService
 import okhttp3.Interceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
-import java.util.*
-import kotlin.reflect.KClass
 
 open class ServiceBuilder {
     companion object {
         private val interceptors: List<Interceptor> = listOf<Interceptor>(BackendInterceptor())
         private val converterFactories: Array<Converter.Factory>? = null
-        private val retrofit by lazy<Retrofit> { retrofitBuilder().build() }
-        private val apiUrl: String = ""
+        private val retrofit by lazy<Retrofit> { retrofitBuilder()
+            .build() }
+        private const val apiUrl: String = "fdsa"
         private fun retrofitBuilder(): Retrofit.Builder {
             return Retrofit.Builder()
                 .baseUrl(apiUrl)
@@ -29,7 +26,7 @@ open class ServiceBuilder {
                 }
         }
 
-        fun create(java: Class<RespostaService>): RespostaService {
+        fun<T> create(java: Class<T>): T {
             return retrofit.create(java)
         }
     }

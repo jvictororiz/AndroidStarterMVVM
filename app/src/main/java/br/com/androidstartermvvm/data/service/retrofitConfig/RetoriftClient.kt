@@ -1,6 +1,5 @@
-package br.com.androidstartermvvm.model.service.http
+package br.com.androidstartermvvm.data.service.retrofitConfig
 
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit

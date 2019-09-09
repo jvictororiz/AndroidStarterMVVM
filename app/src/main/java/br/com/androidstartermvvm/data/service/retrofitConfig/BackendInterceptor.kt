@@ -1,15 +1,12 @@
-package br.com.androidstartermvvm.model.service.http
+package br.com.androidstartermvvm.data.service.retrofitConfig
 
-import android.util.Log
+import br.com.androidstartermvvm.data.entities.remote.response.ErroHttp
 import com.google.gson.Gson
-import com.google.gson.JsonSyntaxException
-import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.lang.Exception
 
-class BackendInterceptor(
-) : Interceptor {
+class BackendInterceptor: Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val builder = request.newBuilder()

@@ -1,4 +1,4 @@
-package br.com.androidstartermvvm.util.extension
+package br.com.androidstartermvvm.util.ext
 
 
 import java.text.ParseException

@@ -1,13 +1,13 @@
-package br.com.androidstartermvvm.ui.main
+package br.com.androidstartermvvm.ui.fragment
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import br.com.androidstartermvvm.R
+import br.com.androidstartermvvm.viewModel.HomeViewModel
 import br.com.bb.oewallet.ui.BaseFragment
 
 class HomeFragment(override val fragmentTag: String) : BaseFragment() {
@@ -16,9 +16,7 @@ class HomeFragment(override val fragmentTag: String) : BaseFragment() {
         fun newInstance() = HomeFragment("HomeFragment")
     }
 
-    internal val viewModel: HomeViewModel by lazy {
-        ViewModelProviders.of(this).get(HomeViewModel::class.java)
-    }
+    private val viewModel: HomeViewModel = HomeViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,

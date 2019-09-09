@@ -1,14 +1,13 @@
-package br.com.androidstartermvvm.model.service
+package br.com.androidstartermvvm.data.service
 
-import br.com.androidstartermvvm.model.entities.Resposta
+import br.com.androidstartermvvm.data.entities.local.User
 import retrofit2.Call
 import retrofit2.http.Body
-import retrofit2.http.Field
 import retrofit2.http.POST
 
 interface RespostaService {
     @POST("")
-    fun listarResposta(): Call<List<Resposta>>
+    fun listarResposta(): Call<List<User>>
 
 
     @POST("")

@@ -5,16 +5,16 @@ import androidx.fragment.app.Fragment
 import br.com.androidstartermvvm.R
 
 abstract class BaseActivity : AppCompatActivity() {
-    fun replace(fragment: Fragment, tag: String, addToBackstack: Boolean? = false) {
-        val fg = supportFragmentManager.findFragmentByTag(tag) ?: fragment
+    fun replace(fragment: BaseFragment, addToBackstack: Boolean? = false) {
+        val fg = supportFragmentManager.findFragmentByTag(fragment.fragmentTag) ?: fragment
         supportFragmentManager.beginTransaction()
             .also {
                 if (addToBackstack == true) {
-                    it.addToBackStack(tag)
+                    it.addToBackStack(fragment.fragmentTag)
                 }
 
             }
-            .replace(R.id.container, fg, tag)
+            .replace(R.id.container, fg, fragment.fragmentTag)
             .commit()
     }
 

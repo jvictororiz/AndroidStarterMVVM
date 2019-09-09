@@ -6,6 +6,16 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:editTextStyle">@style/editTextDefault</item>
+    </style>
+
+    <style name="editTextDefault" >
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:background">@drawable/line_corneres</item>
+    </style>
+
+    <style name="buttonDefaultStyle" >
+        <item name="android:background">@drawable/shape_gradient_button</item>
     </style>
 
 </resources>

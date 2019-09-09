@@ -1,4 +1,4 @@
-package br.com.androidstartermvvm.util.entities
+package br.com.androidstartermvvm.data.entities.local
 
 
 data class Result<T>(val data: T? = null, val throwable: Throwable? = null, val code: Int? = null) {
@@ -24,12 +24,16 @@ data class Result<T>(val data: T? = null, val throwable: Throwable? = null, val 
          * Cria uma mensagem de erro a partir de uma exceção.
          */
         fun <T> error(throwable: Throwable, code: Int? = null) =
-            Result<T>(throwable = throwable, code = code)
+            Result<T>(
+                throwable = throwable,
+                code = code
+            )
 
         /**
          * Cria um resultado de sucesso.
          */
         fun <T> success(data: T, code: Int? = null) =
             Result(data = data, code = code)
+
     }
 }
